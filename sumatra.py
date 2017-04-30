@@ -32,7 +32,7 @@ def topics():
   if request.method == 'GET':
     topics = repositoryActor.ask({'command': 'query',
                                   'offset': int(request.args.get('offset')),
-                                  'step': int(request.args.get('step'))})
+                                  'limit': int(request.args.get('limit'))})
     response = list(map(lambda t: t.__dict__(), topics))
     return str(json.dumps(response))
   elif request.method == 'PUT':

@@ -29,12 +29,27 @@
     </nav>
 
     <div id="divMain" class="container">
+        <div id="MainPreloader" class="progress" v-show="loading">
+            <div class="indeterminate"></div>
+        </div>
         <div class="col s10">
-
+            <div v-if="noContent">
+                <h5>There are no topics here yet, may be you can be the first?</h5>
+            </div>
             <div class="card" v-for="topic in topics">
                 <div class="card-content">
-                    <div class="col s2">{{ topic.votes }}</div>
-                    <div class="col s10"><a href="{{ topic.url }}" style="font-family: Monaco;">{{ topic.topic }}</a></div>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col s9">
+                                <a href="{{ topic.url }}" style="font-family: Monaco;"><h5>{{ topic.topic }}</h5></a>
+                            </div>
+                            <div class="col s3 offset-s19 align-right">
+                                <i>{{ topic.votes }} votes</i>
+                                <br/>
+                                <i> created by {{ topic.user }}</i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-action">
                     <a href="#"><i class="material-icons">thumb_up</i></a>
@@ -48,7 +63,6 @@
                     <i class="large material-icons">mode_edit</i>
                 </a>
             </div>
-
         </div>
     </div>
     <!-- Modal Structure -->
@@ -66,7 +80,7 @@
     <!-- Modal Structure -->
     <div id="ModalAddTopic" class="modal">
         <div class="modal-content">
-            <div class="progress" v-show="loading">
+            <div class="progress" v-show="topicLoading">
                 <div class="indeterminate"></div>
             </div>
             <div class="input-field col s12">

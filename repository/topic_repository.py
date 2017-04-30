@@ -11,7 +11,7 @@ class TopicRepositoryActor(pykka.ThreadingActor):
     if message.get('command') == 'query':
       # get topics
       l = sorted(self.topics.values(), key=lambda t: t.get_votes())
-      return l[int(message.get('offset')):int(message.get('step'))]
+      return l[int(message.get('offset')):int(message.get('limit'))]
     elif message.get('command') == 'up_vote':
       # up vote a certain topic
       t = self.topics.get(message.get('topic'))

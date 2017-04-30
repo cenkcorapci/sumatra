@@ -57,7 +57,7 @@ class SumatraTestCase(unittest.TestCase):
         .status_code,
       200)
 
-    result = self.client.get('/v1/topics?offset=0&step=10')
+    result = self.client.get('/v1/topics?offset=0&limit=10')
     topics = json.loads(result.data.decode('utf-8'))
     # order of the elements can be changed, check selected values
     self.assertEqual(list(map(lambda t: [t.get('topic'), t.get('votes')], topics)),
