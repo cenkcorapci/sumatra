@@ -15,9 +15,10 @@ class Topic:
 
   def __dict__(self):
     return {
-      'topic': self.topic,
-      'url': self.url,
-      'votes': self.votes
+      'topic': self.get_topic(),
+      'user': self.get_user(),
+      'url': self.get_url(),
+      'votes': self.get_votes()
     }
 
   def get_url(self):

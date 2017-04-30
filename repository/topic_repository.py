@@ -28,17 +28,3 @@ class TopicRepositoryActor(pykka.ThreadingActor):
       # add a new topic
       t = Topic(message)
       self.topics[t.get_topic()] = t
-
-
-if __name__ == '__main__':
-  actor = TopicRepositoryActor.start()
-  actor.tell({'url': 'test', 'topic': 'topic', 'user': 'user'})
-  actor.tell({'url': 'test2', 'topic': 'topic2', 'user': 'user'})
-
-  print(list(map(lambda t: t.get_topic(), actor.ask({'command': 'query', 'offset': 0, 'step': 10}))))
-  actor.tell({'command': 'up_vote', 'topic': 'topic', 'by': 'someone'})
-  actor.tell({'command': 'down_vote', 'topic': 'topic2', 'by': 'someone'})
-  print(list(map(lambda t: t.get_topic(), actor.ask({'command': 'query', 'offset': 0, 'step': 10}))))
-  print(list(map(lambda t: t.get_topic(), actor.ask({'command': 'query', 'offset': 0, 'step': 1}))))
-
-  actor.stop()
