@@ -30,12 +30,11 @@
 
     <div id="divMain" class="container">
         <div class="col s10">
-            <div class="card">
+
+            <div class="card" v-for="topic in topics">
                 <div class="card-content">
-                    <a href="#" style="font-family: Monaco;">I am a very simple card. I am good at containing small bits
-                        of
-                        information.
-                        I am convenient because I require little markup to use effectively.</a>
+                    <div class="col s2">{{ topic.votes }}</div>
+                    <div class="col s10"><a href="{{ topic.url }}" style="font-family: Monaco;">{{ topic.topic }}</a></div>
                 </div>
                 <div class="card-action">
                     <a href="#"><i class="material-icons">thumb_up</i></a>
@@ -45,7 +44,7 @@
         </div>
         <div class="col s2">
             <div class="fixed-action-btn horizontal">
-                <a class="btn-floating btn-large teal">
+                <a class="btn-floating btn-large teal" v-on:click="triggerAddTopic">
                     <i class="large material-icons">mode_edit</i>
                 </a>
             </div>
@@ -62,6 +61,25 @@
         </div>
         <div class="modal-footer">
             <a v-on:click="logIn" class="modal-action modal-close waves-effect waves-green btn-flat">Log In</a>
+        </div>
+    </div>
+    <!-- Modal Structure -->
+    <div id="ModalAddTopic" class="modal">
+        <div class="modal-content">
+            <div class="progress" v-show="loading">
+                <div class="indeterminate"></div>
+            </div>
+            <div class="input-field col s12">
+                <input id="InputTopic" maxlength="255" type="search" class="validate" v-model="topic">
+                <label for="InputTopic">Topic</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="InputURL" maxlength="255" type="search" class="validate" v-model="url">
+                <label for="InputURL">Url</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="waves-effect waves-light btn-large" v-on:click="addTopic"><i class="material-icons left">add</i>Add</a>
         </div>
     </div>
 </div>
