@@ -7,8 +7,7 @@ var sumatraApp = new Vue({
     userName: "User Name",
     reddits: []
   },
-  methods: {
-  },
+  methods: {},
   mounted: function () {
     console.log("app loaded.")
   }

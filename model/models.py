@@ -4,6 +4,11 @@ class Topic:
     self.url = dict.get('url')
     self.user = dict.get('user')
     self.votes = 0
+    self.up_voted_by = set()
+    self.down_voted_by = set()
+
+  def __recalculate_votes(self):
+    self.votes = len(self.up_voted_by) - len(self.down_voted_by)
 
   def get_votes(self):
     return self.votes
@@ -24,8 +29,14 @@ class Topic:
   def get_user(self):
     return self.user
 
-  def up_vote(self):
-    self.votes += 1
+  def up_vote(self, by):
+    self.up_voted_by.add(by)
+    if self.down_voted_by.__contains__(by):
+      self.down_voted_by.remove(by)
+    self.__recalculate_votes()
 
-  def down_vote(self):
-    self.votes -= 1
+  def down_vote(self, by):
+    self.down_voted_by.add(by)
+    if self.up_voted_by.__contains__(by):
+      self.up_voted_by.remove(by)
+    self.__recalculate_votes()
