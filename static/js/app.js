@@ -95,6 +95,56 @@ window.onload = function () {
         } catch (exp) {
           errorProtocol(exp);
         }
+      },
+      upVote: function (topic) {
+        var errorProtocol = function (error) {
+          console.error(error);
+          Materialize.toast('An Error Occured!', 4000);
+        };
+        try {
+          var endpoint = '/v1/up-vote';
+          var payload = {
+            'topic': topic.topic,
+            'by': topic.userName
+          };
+          this.$http.post(endpoint, payload)
+            .then(function (response) {
+              if (response.status == 200) {
+                this.fetchAll();
+              } else {
+                errorProtocol(response.statusText);
+              }
+            }, function (error) {
+              errorProtocol(error)
+            });
+        } catch (exp) {
+          errorProtocol(exp);
+        }
+      },
+      downVote: function (topic) {
+        var errorProtocol = function (error) {
+          console.error(error);
+          Materialize.toast('An Error Occured!', 4000);
+        };
+        try {
+          var endpoint = '/v1/down-vote';
+          var payload = {
+            'topic': topic.topic,
+            'by': topic.userName
+          };
+          this.$http.post(endpoint, payload)
+            .then(function (response) {
+              if (response.status == 200) {
+                this.fetchAll();
+              } else {
+                errorProtocol(response.statusText);
+              }
+            }, function (error) {
+              errorProtocol(error)
+            });
+        } catch (exp) {
+          errorProtocol(exp);
+        }
       }
     },
     mounted: function () {
