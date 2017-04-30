@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <title>Sumatra</title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <!-- Compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"
             integrity="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw=" crossorigin="anonymous"></script>
@@ -13,18 +13,57 @@
     <script src="https://cdn.jsdelivr.net/vue.resource/1.3.1/vue-resource.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
 </head>
-<body>
-<nav>
-    <div id="divNavBar" class="navbar-fixed teal lighten-2">
-        <a href="/" class="brand-logo">&nbsp;Sumatra</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><i class="fa-li fa fa-user">User Name</i></li>
-            <li><i class="fa-li fa fa-plus">Add Topic</i></li>
-        </ul>
-    </div>
-</nav>
-<div id="divMain" class="container">
+<body id="Body">
+<div id="DivMain">
+    <nav class="teal lighten-2">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">&nbsp;&nbsp;&nbsp;Sumatra</a>
+            <ul id="nav-mobile" v-if="loggedIn" class="right hide-on-med-and-down">
+                <li><a href="#" class="waves-effect waves-light">{{ userName }}&nbsp;&nbsp;</a></li>
+                <li><a class="waves-effect waves-light" id="BtnLogout" v-on:click="logOut">Log Out</a></li>
+            </ul>
+            <ul id="nav-mobile" v-else class="right hide-on-med-and-down">
+                <li><a class="waves-effect waves-light" onclick="$('#ModalLogIn').modal('open');">Log In</a></li>
+            </ul>
+        </div>
+    </nav>
 
+    <div id="divMain" class="container">
+        <div class="col s10">
+            <div class="card">
+                <div class="card-content">
+                    <a href="#" style="font-family: Monaco;">I am a very simple card. I am good at containing small bits
+                        of
+                        information.
+                        I am convenient because I require little markup to use effectively.</a>
+                </div>
+                <div class="card-action">
+                    <a href="#"><i class="material-icons">thumb_up</i></a>
+                    <a href="#"><i class="material-icons">thumb_down</i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col s2">
+            <div class="fixed-action-btn horizontal">
+                <a class="btn-floating btn-large teal">
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <!-- Modal Structure -->
+    <div id="ModalLogIn" class="modal">
+        <div class="modal-content">
+            <div class="input-field col s12">
+                <input id="InputUserName" type="search" class="validate" v-model="userName">
+                <label for="InputUserName">Your Name</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a v-on:click="logIn" class="modal-action modal-close waves-effect waves-green btn-flat">Log In</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>
