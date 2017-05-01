@@ -6,26 +6,25 @@ Sumatra
 
 A simple Reddit clone that uses a transient
  in-memory data storage.
- 
- [Here is a demo](sumatra-app.herokuapp.com)
- 
- > Pelease note that this app stores its data app context, which will make it probabilistic in 
- any load balanced/distributed environment such as Heroku and it will have data inconsistencies.  
-### Features 
+
+ [Here is a demo](http://sumatra-app.herokuapp.com/)
+
+ > Pelease note that this app, stores its data in application context, which will make it probabilistic under
+ any load balanced environment such as Heroku and it will have data inconsistencies.  
+### Features
 - Uses [Pykka](https://github.com/jodal/pykka) actor models for concurreny in in-memory data storage.
 - Only supports one subreddit.
-- Users can up vote and down vote and create new topics without authentication.Just enter your name for logging in.
+- Users can up vote, down vote and create new topics without authentication.Just enter your name for logging in.
 ### How to run
-You have to be installed [pip](https://pypi.python.org/pypi/pip) for installing dependencies.After that, run
+You can use [pip](https://pypi.python.org/pypi/pip) for installing dependencies via this command;
  ```
  pip install -r requirements.txt
  ```
- for installing dependencies.When you have installed dependencies you 
- boot up the app with following commands;
+ To boot up the web app with gunicorn;
 ```
-web: gunicorn -b 0.0.0.0:$PORT sumatra:app
+gunicorn -b 0.0.0.0:8080 sumatra:app
 ```
-or
+To boot up the app with python;
 ```
 python sumatra.py
 ```
