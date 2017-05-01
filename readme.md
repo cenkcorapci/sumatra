@@ -2,6 +2,7 @@ Sumatra
 =======
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 [![Coverage Status](https://coveralls.io/repos/github/cenkcorapci/sumatra/badge.svg?branch=master)](https://coveralls.io/github/cenkcorapci/sumatra?branch=master)
+[![Build Status](https://travis-ci.org/cenkcorapci/sumatra.svg?branch=master)](https://travis-ci.org/cenkcorapci/sumatra)
 
 A simple Reddit clone that uses a transient
  in-memory data storage.
