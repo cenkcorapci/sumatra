@@ -14,8 +14,8 @@ class SumatraTestCase(unittest.TestCase):
     self.assertEqual(result.status_code, 200)
 
   def test_create_and_upvote(self):
-    expected = [{'url': 'test2', 'topic': 'topic2', 'user': 'user', 'votes': 0},
-                {'url': 'test', 'topic': 'topic', 'user': 'user', 'votes': 2}]
+    expected = [{'url': 'test', 'topic': 'topic', 'user': 'user', 'votes': 2},
+                {'url': 'test2', 'topic': 'topic2', 'user': 'user', 'votes': 0}]
 
     # test creating topics
     self.assertEqual(
