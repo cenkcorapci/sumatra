@@ -1,5 +1,5 @@
 import unittest
-from sumatra import app
+from sumatra import app, topicActor
 import json
 
 
@@ -63,6 +63,8 @@ class SumatraTestCase(unittest.TestCase):
     self.assertEqual(list(map(lambda t: [t.get('topic'), t.get('votes')], topics)),
                      list(map(lambda t: [t.get('topic'), t.get('votes')], expected)))
 
+  def tearDown(self):
+    topicActor.stop()
 
 if __name__ == '__main__':
   unittest.main()

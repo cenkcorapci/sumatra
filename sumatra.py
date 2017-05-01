@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from repository.topic_repository import TopicRepositoryActor
+from actors.topic_actor import TopicActor
 import json
 
 
@@ -19,7 +19,7 @@ class CustomFlask(Flask):
 
 
 app = CustomFlask(__name__)
-repositoryActor = TopicRepositoryActor.start()
+topicActor = TopicActor.start()
 
 
 @app.route('/')
@@ -30,13 +30,13 @@ def index():
 @app.route('/v1/topics', methods=['GET', 'PUT'])
 def topics():
   if request.method == 'GET':
-    topics = repositoryActor.ask({'command': 'query',
+    topics = topicActor.ask({'command': 'query',
                                   'offset': int(request.args.get('offset')),
                                   'limit': int(request.args.get('limit'))})
     response = list(map(lambda t: t.__dict__(), topics))
     return str(json.dumps(response))
   elif request.method == 'PUT':
-    repositoryActor.tell(json.loads(request.data.decode('utf-8')))
+    topicActor.tell(json.loads(request.data.decode('utf-8')))
     return 'ok'
 
 
@@ -45,7 +45,7 @@ def up_vote():
   req = json.loads(str(request.data.decode('utf-8')))
   by = req.get('by')
   topic = req.get('topic')
-  repositoryActor.tell({'command': 'up_vote', 'by': by, 'topic': topic})
+  topicActor.tell({'command': 'up_vote', 'by': by, 'topic': topic})
   return 'ok'
 
 
@@ -54,7 +54,7 @@ def down_vote():
   req = json.loads(request.data.decode('utf-8'))
   by = req.get('by')
   topic = req.get('topic')
-  repositoryActor.tell({'command': 'down_vote', 'by': by, 'topic': topic})
+  topicActor.tell({'command': 'down_vote', 'by': by, 'topic': topic})
   return 'ok'
 
 

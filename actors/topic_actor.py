@@ -1,10 +1,10 @@
 import pykka
-from model.models import Topic
+from models.models import Topic
 
 
-class TopicRepositoryActor(pykka.ThreadingActor):
+class TopicActor(pykka.ThreadingActor):
   def __init__(self):
-    super(TopicRepositoryActor, self).__init__()
+    super(TopicActor, self).__init__()
     self.topics = {}  # using a set for random access on the topics so we can easily vote them.
 
   def on_receive(self, message):
