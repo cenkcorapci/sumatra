@@ -3,4 +3,5 @@ pykka
 nose
 Werkzeug
 coverage
+gunicorn
 

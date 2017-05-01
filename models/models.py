@@ -13,7 +13,7 @@ class Topic:
   def get_votes(self):
     return self.votes
 
-  def __dict__(self):
+  def as_dict(self):
     return {
       'topic': self.get_topic(),
       'user': self.get_user(),

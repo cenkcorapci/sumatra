@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from actors.topic_actor import TopicActor
 import json
+import os
 
 
 class CustomFlask(Flask):
@@ -31,9 +32,9 @@ def index():
 def topics():
   if request.method == 'GET':
     topics = topicActor.ask({'command': 'query',
-                                  'offset': int(request.args.get('offset')),
-                                  'limit': int(request.args.get('limit'))})
-    response = list(map(lambda t: t.__dict__(), topics))
+                             'offset': int(request.args.get('offset')),
+                             'limit': int(request.args.get('limit'))})
+    response = list(map(lambda t: t.as_dict(), topics))
     return str(json.dumps(response))
   elif request.method == 'PUT':
     topicActor.tell(json.loads(request.data.decode('utf-8')))
@@ -59,4 +60,5 @@ def down_vote():
 
 
 if __name__ == '__main__':
-  app.run(port=8080)
+  port = int(os.environ.get("PORT", 5000))
+  app.run(host='0.0.0.0', port=port)
